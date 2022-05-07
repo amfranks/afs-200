@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Address Book</title>
+    <style>
+        .rolodex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            margin-top: 1rem;
+        }
+        
+        .card {
+            display: grid;
+            grid-template-columns: (100px, auto);
+            grid-template-rows: repeat(3, auto);
+            gap: 0.25rem;
+            border: 2px solid black;
+            padding: 0.5rem;
+            min-width: 22rem;
+        }
+        
+        .card .photo {
+            grid-column: 1 / 2;
+            grid-row: 1 / -1;
+            width: 100px;
+        }
+        
+        .card .photo img {
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .card .name {
+            grid-column: 2 / 3;
+            font-size: 1.3rem;
+        }
+        
+        .card .email {
+            grid-column: 2 / 3;
+            font-size: 1rem;    
+            color: #777;
+        }
+        
+        .card .phone {
+            grid-column: 2 / 3;
+            font-size: 1rem;    
+            color: #777;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>My Address Book</h1>
+    <div class="rolodex">
+        {% for contact in contacts %}
+        <div class="card">
+            <div class="photo">
+                <a href="/{{ contact.id }}"><img src="{{ contact.photo }}" alt=""></a>
+
+            </div>
+            <div class="name">{{ contact.firstname}} {{ contact.lastname}}</div>
+            <div class="phone">{{ contact.phone}}</div>
+            <div class="emal"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div>
+
+        </div>    
+     
+        {% endfor %}                 
+    </div>
+</body>
+</html>
