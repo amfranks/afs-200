@@ -1,12 +1,10 @@
-from unicodedata import category
-from urllib import response
 import requests, triviaquestion, uuid
 
 class TriviaGame():
     def __init__(self):
         self.triviaQuestions = []
 
-    def getAllQuestions(self): # Getter method to retrieve all questions.
+    def getAllQuestions(self): 
         return self.triviaQuestions
 
     def retrieveMultipleChoice(self, categoryID, numOfQuestions): # Retrieves multiple choice trivia questions from the API.
@@ -34,7 +32,6 @@ class TriviaGame():
 
         # Loop through all returned questions.
         for question in listOfQuestions["results"]:
-
             id = uuid.uuid1()
 
             newQuestion = triviaquestion.TriviaQuestion(

@@ -2,11 +2,8 @@ from flask import Flask, render_template, request
 import triviaquestion, triviagame
 
 app = Flask(__name__)
-
 trivia_game = triviagame.TriviaGame()
 trivia_game_questions = trivia_game.getAllQuestions()
-
-####################################################
 
 @app.route("/")
 def home():
@@ -19,21 +16,15 @@ def home():
 
 @app.route("/score", methods=['POST'])
 def scoreGame():
-
     if request.method == 'POST':
-
         correctlyAnsweredQuestions = [] 
         incorrectlyAnsweredQuestions = []
-
         for question in trivia_game_questions:
             if (request.form[str(question.getID())] == question.getCorrectAnswer()): # If question id (from form) is equal to a correct answer.
                 correctlyAnsweredQuestions.append(question)
             else:
                 incorrectlyAnsweredQuestions.append(question)
-
         return render_template('results.html', results=[correctlyAnsweredQuestions, incorrectlyAnsweredQuestions])
-
-####################################################
 
 if __name__ == "__main__":
     app.run()
